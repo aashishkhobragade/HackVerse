@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | TechVerse 2025</title>
+
+    <!-- Bootstrap CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- <script src="https://cdn.emailjs.com/dist/email.min.js"></script> -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+
+
+
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background: linear-gradient(45deg, #0b0024, #220c55);
+            min-height: 100vh;
+        }
+
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .glassmorphism:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            color: #e5e5e5;
+            transition: transform 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            border: 1px solid #4b5563;
+            /* border-gray-600 */
+            transition: border-color 0.3s, background-color 0.3s;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #3b82f6;
+            /* border-blue-500 */
+            background-color: rgba(255, 255, 255, 0.2);
+            /* bg-white/20 */
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+            border-radius: 2px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="text-white">
+    <nav class="navbar navbar-expand-lg fixed-top bg-opacity-50 shadow-md py-3 glassmorphism">
+        <div class="container">
+            <a class="navbar-brand text-white font-bold text-2xl d-flex align-items-center" href="./index.html">
+                <i class="bi bi-code-slash me-2"></i> TechVerse 2025
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="bi bi-list text-2xl"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-end" id="navbarNav">
+                <ul class="navbar-nav gap-4">
+                    <li class="nav-item"><a class="nav-link text-white hover:text-blue-400" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-white hover:text-blue-400"
+                            href="#timeline">Timeline</a></li>
+                    <li class="nav-item"><a class="nav-link text-white hover:text-blue-400"
+                            href="#sponsors">Sponsors</a></li>
+                    <li class="nav-item">
+                        <a href="#" class="btn btn-primary rounded-full px-6 py-2 shadow-lg hover:bg-blue-500">Register
+                            Now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Progress Bar
+    <div class="fixed top-0 left-0 w-full z-50">
+        <div class="progress-bar">
+            <div id="progress" class="progress-fill" style="width: 0%"></div>
+        </div>
+    </div> -->
+
+    <!-- Registration Section -->
+    <div class="container mx-auto px-4 py-24">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Left Guide Section -->
+            <div class="info-box hidden md:block space-y-4">
+                <h3 class="text-xl font-bold text-blue-400">Guidelines</h3>
+                <div class="space-y-2">
+                    <p class="flex items-center"><i class="bi bi-check-circle-fill text-green-400 mr-2"></i> Team size:
+                        2-4 members</p>
+                    <p class="flex items-center"><i class="bi bi-check-circle-fill text-green-400 mr-2"></i> Valid
+                        college email required</p>
+                    <p class="flex items-center"><i class="bi bi-check-circle-fill text-green-400 mr-2"></i> One team
+                        per project</p>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold text-blue-300">Registration Steps:</h4>
+                    <ol class="list-decimal list-inside space-y-2 text-sm">
+                        <li>Fill team details</li>
+                        <li>Add team members</li>
+                        <li>Choose project category</li>
+                        <li>Submit registration</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="col-span-2 glassmorphism">
+                <h2
+                    class="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                    Register for TechVerse 2025
+                </h2>
+
+                <form id="registrationForm" class="space-y-6" onsubmit="handleSubmit(event)">
+                    <!-- Team Basic Info -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" name="team_name" placeholder="Team Name *" required
+                            class="w-full p-3 bg-white/10 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none"
+                            title="Team name is required">
+
+                        <select name="project_category" required
+                            class="w-full p-3 bg-white/10 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none">
+                            <option value="" disabled selected>Select Project Category *</option>
+                            <optgroup label="AI/ML">
+                                <option value="ai-ml-1">1. AI/ML - Fake News Detection System</option>
+                                <option value="ai-ml-2">2. AI/ML - Automated Resume Screening</option>
+                                <option value="ai-ml-3">3. AI/ML - Traffic Congestion Prediction</option>
+                                <option value="ai-ml-4">4. AI/ML - AI-Powered Personal Tutor</option>
+                                <option value="ai-ml-5">5. AI/ML - Sentiment Analysis for Product Reviews</option>
+                                <option value="ai-ml-6">6. AI/ML - Medical Image Diagnosis Using Deep Learning</option>
+                            </optgroup>
+                            <optgroup label="Web Development">
+                                <option value="web-1">7. Web Dev - E-Commerce Website with AI Chatbot</option>
+                                <option value="web-2">8. Web Dev - Collaborative Code Editor</option>
+                                <option value="web-3">9. Web Dev - AI-Based Blog Recommendation System</option>
+                                <option value="web-4">10. Web Dev - Portfolio Website with Interactive Resume</option>
+                                <option value="web-5">11. Web Dev - Real-Time Stock Price Dashboard</option>
+                                <option value="web-6">12. Web Dev - Gamified Learning Platform</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <!-- Team Members Section -->
+                    <div id="team-members" class="space-y-4">
+                        <!-- Team Leader -->
+                        <div class="p-4 bg-white/5 rounded-lg">
+                            <h3 class="text-xl mb-4 flex items-center">
+                                <i class="bi bi-person-star mr-2"></i> Team Leader Information
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input type="text" name="leader_full_name" placeholder="Full Name *" required
+                                    class="w-full p-3 bg-white/10 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none">
+                                <input type="email" name="leader_email" placeholder="College Email *" required
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                    class="w-full p-3 bg-white/10 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none">
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                <input type="tel" name="leader_contact" placeholder="Contact Number *" required
+                                    pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number"
+                                    class="w-full p-3 bg-white/10 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none">
+                                <input type="text" name="leader_college" placeholder="College/University Name *"
+                                    required
+                                    class="w-full p-3 bg-white/10 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none">
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                <select name="leader_year" required
+                                    class="w-full p-3 bg-white/10 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none">
+                                    <option value="" disabled selected>Year of Study *</option>
+                                    <option value="1">First Year</option>
+                                    <option value="2">Second Year</option>
+                                    <option value="3">Third Year</option>
+                                    <option value="4">Final Year</option>
+                                </select>
+                                <input type="url" name="leader_github" placeholder="GitHub Profile URL *" required
+                                    pattern="https://github.com/.*" title="Please enter a valid GitHub URL"
+                                    class="w-full p-3 bg-white/10 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-sm text-gray-400">* Required fields</p>
+
+                    <!-- Action Buttons -->
+                    <button type="button" onclick="addMember()"
+                        class="w-full p-3 border-2 border-dashed border-blue-500 rounded-lg hover:bg-blue-500/20 transition duration-300 flex items-center justify-center">
+                        <i class="bi bi-plus-circle mr-2"></i>Add Team Member
+                    </button>
+
+                    <button type="submit" id="submitBtn"
+                        class="w-full p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl flex items-center justify-center">
+                        <span id="submitText">Register Team</span>
+                        <div id="submitLoader" class="hidden">
+                            <svg class="animate-spin h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                            </svg>
+                        </div>
+                    </button>
+                </form>
+            </div>
+
+
+        </div>
+
+        <!-- Add Progress Bar HTML at the top of body -->
+        <div class="fixed top-0 left-0 w-full z-50">
+            <div class="h-1 bg-gray-700">
+                <div id="progress"
+                    class="h-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300"
+                    style="width: 0%">
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Remove type="module" and add proper script -->
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+        <script>
+            // Initialize Supabase client
+            const supabaseClient = supabase.createClient(
+                'https://ecxqigkgxsrmkmvhukxq.supabase.co',
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeHFpZ2tneHNybWttdmh1a3hxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIwNjgzNTMsImV4cCI6MjA1NzY0NDM1M30.a1OPvN5OfwYdph0OOkmCPcolLO4Y1TL7xPDpn0wFzpI'
+            );
+
+            // Global variables
+            let memberCount = 1;
+            let progress = 0;
+
+            // Progress bar functions
+            function updateProgress() {
+                progress = Math.min(100, progress + 33.33);
+                document.getElementById('progress').style.width = `${progress}%`;
+            }
+
+            // Team member management
+            function addMember() {
+                if (memberCount >= 3) {
+                    alert('Maximum 2 additional team members allowed');
+                    return;
+                }
+                memberCount++;
+                updateProgress();
+
+                const membersDiv = document.getElementById('team-members');
+                const newMember = document.createElement('div');
+                newMember.className = 'team-member p-4 bg-white/5 rounded-lg mt-4';
+                newMember.innerHTML = `
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl flex items-center">
+                <i class="bi bi-person mr-2"></i>Team Member ${memberCount}
+            </h3>
+            <button type="button" onclick="removeMember(this)" 
+                class="text-red-400 hover:text-red-500 transition">
+                <i class="bi bi-x-circle"></i>
+            </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input type="text" name="member_full_name" placeholder="Full Name *" required
+                class="w-full p-3 bg-white/10 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none">
+            <input type="email" name="member_college_email" placeholder="College Email *" required
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                class="w-full p-3 bg-white/10 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none">
+        </div>
+    `;
+                membersDiv.appendChild(newMember);
+            }
+
+            function removeMember(btn) {
+                btn.closest('.team-member').remove();
+                memberCount--;
+                progress -= 33.33;
+                document.getElementById('progress').style.width = `${progress}%`;
+            }
+
+            // Form submission
+            async function handleSubmit(event) {
+                event.preventDefault();
+                const form = event.target;
+                const submitBtn = document.getElementById('submitBtn');
+                const submitText = document.getElementById('submitText');
+                const submitLoader = document.getElementById('submitLoader');
+
+                try {
+                    submitBtn.disabled = true;
+                    submitText.textContent = 'Registering...';
+                    submitLoader.classList.remove('hidden');
+
+                    // Step 1: Insert team data
+                    const { data: teamData, error: teamError } = await supabaseClient
+                        .from('teams')
+                        .insert([{
+                            team_name: form.querySelector('input[name="team_name"]').value,
+                            project_category: form.querySelector('select[name="project_category"]').value
+                        }])
+                        .select();
+
+                    if (teamError) throw teamError;
+
+                    // Step 2: Insert leader data
+                    const { error: leaderError } = await supabaseClient
+                        .from('team_leaders')
+                        .insert([{
+                            team_id: teamData[0].id,
+                            full_name: form.querySelector('input[name="leader_full_name"]').value,
+                            college_email: form.querySelector('input[name="leader_email"]').value,
+                            contact_number: form.querySelector('input[name="leader_contact"]').value,
+                            college_name: form.querySelector('input[name="leader_college"]').value,
+                            year_of_study: form.querySelector('select[name="leader_year"]').value,
+                            github_url: form.querySelector('input[name="leader_github"]').value
+                        }]);
+
+                    if (leaderError) throw leaderError;
+
+                    // Step 3: Insert team members
+                    const members = Array.from(form.querySelectorAll('.team-member:not(:first-child)'))
+                        .map(member => ({
+                            team_id: teamData[0].id,
+                            full_name: member.querySelector('input[name="member_full_name"]').value,
+                            college_email: member.querySelector('input[name="member_college_email"]').value
+                        }));
+
+                    if (members.length > 0) {
+                        const { error: membersError } = await supabaseClient
+                            .from('team_members')
+                            .insert(members);
+                        if (membersError) throw membersError;
+                    }
+
+                    alert('Registration successful!');
+                    form.reset();
+                    window.location.href = 'index.html';
+
+                } catch (error) {
+                    console.error('Registration error:', error);
+                    alert(`Registration failed: ${error.message}`);
+                } finally {
+                    submitBtn.disabled = false;
+                    submitText.textContent = 'Register Team';
+                    submitLoader.classList.add('hidden');
+                }
+            }
+            // Make functions globally available
+            window.addMember = addMember;
+            window.removeMember = removeMember;
+            window.handleSubmit = handleSubmit;
+
+        </script>
+
+
+
+
+</body>
+
+</html>

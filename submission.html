@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Submission | TechVerse 2025</title>
+
+    <!-- Bootstrap CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        body {
+            background: linear-gradient(45deg, #0b0024, #220c55);
+            min-height: 100vh;
+        }
+
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .countdown-container {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            min-width: 100px;
+        }
+    </style>
+</head>
+
+<body class="text-white background-color: #0b0024">
+    <!-- Navbar (same as register.html) -->
+    <nav class="navbar navbar-expand-lg fixed-top bg-opacity-50 shadow-md py-3 glassmorphism">
+        <div class="container">
+            <a class="navbar-brand text-white font-bold text-2xl d-flex align-items-center" href="./index.html">
+                <i class="bi bi-code-slash me-2"></i> TechVerse 2025
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="bi bi-list text-2xl"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-end" id="navbarNav">
+                <ul class="navbar-nav gap-4">
+                    <li class="nav-item"><a class="nav-link text-white hover:text-blue-400" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-white hover:text-blue-400"
+                            href="#timeline">Timeline</a></li>
+                    <li class="nav-item"><a class="nav-link text-white hover:text-blue-400"
+                            href="#sponsors">Sponsors</a></li>
+                    <li class="nav-item">
+                        <a href="#" class="btn btn-primary rounded-full px-6 py-2 shadow-lg hover:bg-blue-500">Register
+                            Now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 pt-24">
+        <div class="countdown-container">
+            <h2 class="text-center text-2xl mb-4">Time Remaining for Submission</h2>
+            <div class="flex justify-center gap-4">
+                <div class="countdown-item text-center">
+                    <div id="hours" class="text-3xl font-bold text-blue-400">00</div>
+                    <div class="text-sm">Hours</div>
+                </div>
+                <div class="countdown-item text-center">
+                    <div id="minutes" class="text-3xl font-bold text-blue-400">00</div>
+                    <div class="text-sm">Minutes</div>
+                </div>
+                <div class="countdown-item text-center">
+                    <div id="seconds" class="text-3xl font-bold text-blue-400">00</div>
+                    <div class="text-sm">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submission Form -->
+    <div class="container mx-auto px-4 pb-24">
+        <div class="glassmorphism">
+            <!-- Left Guide Section -->
+            <div class="info-box hidden md:block space-y-4">
+                <h3 class="text-xl font-bold text-blue-400">Submission Guidelines</h3>
+                <div class="space-y-2">
+                    <p class="flex items-center">
+                        <i class="bi bi-check-circle-fill text-green-400 mr-2"></i>
+                        GitHub repository must be public
+                    </p>
+                    <p class="flex items-center">
+                        <i class="bi bi-check-circle-fill text-green-400 mr-2"></i>
+                        Demo video: Max 5 minutes
+                    </p>
+                    <p class="flex items-center">
+                        <i class="bi bi-check-circle-fill text-green-400 mr-2"></i>
+                        Screenshots: Max 3 images (2MB each)
+                    </p>
+                    <p class="flex items-center">
+                        <i class="bi bi-exclamation-circle-fill text-yellow-400 mr-2"></i>
+                        Submission deadline: January 20, 2024 5:00 PM
+                    </p>
+                </div>
+
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold text-blue-300">Required Components:</h4>
+                    <ul class="list-inside space-y-2 text-sm">
+                        <li class="flex items-center">
+                            <i class="bi bi-file-code text-blue-400 mr-2"></i> Source Code
+                        </li>
+                        <li class="flex items-center">
+                            <i class="bi bi-camera text-blue-400 mr-2"></i> Project Screenshots
+                        </li>
+                        <li class="flex items-center">
+                            <i class="bi bi-camera-video text-blue-400 mr-2"></i> Demo Video
+                        </li>
+                        <li class="flex items-center">
+                            <i class="bi bi-file-text text-blue-400 mr-2"></i> Project Description
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold text-blue-300">Submission Steps:</h4>
+                    <ol class="list-decimal list-inside space-y-2 text-sm">
+                        <li>Upload project to GitHub</li>
+                        <li>Create demo video</li>
+                        <li>Fill submission form</li>
+                        <li>Review and submit</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- Team Verification Section -->
+            <div class="glassmorphism p-6 rounded-xl shadow-lg backdrop-blur-lg bg-white/10 border border-gray-600">
+                <h2
+                    class="text-3xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                    Verify Your Team
+                </h2>
+
+                <div class="flex gap-4 mb-6">
+                    <input type="email" id="verifyEmail" placeholder="Enter Team Leader's Email *" required
+                        class="flex-1 p-3 bg-white/10 backdrop-blur-lg rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none transition-all duration-300"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                    <button onclick="verifyTeam()"
+                        class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold hover:scale-105 transition-all duration-300 flex items-center shadow-md">
+                        <i class="bi bi-search mr-2"></i> View
+                    </button>
+                </div>
+
+                <div id="teamDetails" class="hidden space-y-4 p-4 backdrop-blur-lg rounded-lg border border-gray-600">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h3 class="text-blue-400 text-sm mb-1">Team Name</h3>
+                            <p id="teamName" class="text-lg font-semibold">-</p>
+                        </div>
+                        <div>
+                            <h3 class="text-blue-400 text-sm mb-1">Project Category</h3>
+                            <p id="projectCategory" class="text-lg font-semibold">-</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-blue-400 text-sm mb-2">Team Members</h3>
+                        <div id="membersList" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <!-- Members will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div id="verifyError" class="hidden text-red-400 text-center mt-4">
+                    <!-- Error message will be inserted here -->
+                </div>
+            </div>
+
+            <br>
+            <h2
+                class="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                Project Submission Form
+            </h2>
+
+            <form id="submissionForm"
+                class="space-y-6 glassmorphism p-6 rounded-xl shadow-lg backdrop-blur-lg bg-white/10 border border-gray-600"
+                onsubmit="handleSubmit(event)">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                    <input type="text" placeholder="Project Title *" required
+                        class="w-full p-3 bg-white/20 backdrop-blur-lg rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none transition-all duration-300">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="url" placeholder="GitHub Repository URL *" required
+                        class="w-full p-3 bg-white/20  rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none transition-all duration-300"
+                        pattern="https://github.com/.*">
+                    <input type="url" placeholder="Demo Video URL (YouTube/Drive) *" required
+                        class="w-full p-3 bg-white/20 backdrop-blur-lg rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none transition-all duration-300">
+                </div>
+
+                <textarea placeholder="Project Description *" required rows="4"
+                    class="w-full p-3 bg-white/20 backdrop-blur-lg rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none transition-all duration-300"></textarea>
+
+
+
+                <button type="submit" id="submitBtn"
+                    class="w-full p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold
+                    transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl flex items-center justify-center">
+                    <span id="submitText">Submit Project</span>
+                    <div id="submitLoader" class="hidden">
+                        <svg class="animate-spin h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                            </circle>
+                            <path class="opacity-75" fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                        </svg>
+                    </div>
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        //SUPA BASE CLIENT
+        const supabaseClient = supabase.createClient(
+            'https://ecxqigkgxsrmkmvhukxq.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeHFpZ2tneHNybWttdmh1a3hxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIwNjgzNTMsImV4cCI6MjA1NzY0NDM1M30.a1OPvN5OfwYdph0OOkmCPcolLO4Y1TL7xPDpn0wFzpI'
+        );
+        // Countdown Timer
+        function updateCountdown() {
+            const deadline = new Date("2026-01-20T17:00:00").getTime();
+            const now = new Date().getTime();
+            const timeLeft = deadline - now;
+
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+
+            if (timeLeft < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById("submissionForm").innerHTML = `
+                    <div class="text-center text-red-400 text-xl">
+                        <i class="bi bi-exclamation-triangle-fill mr-2"></i>
+                        Submission deadline has passed
+                    </div>`;
+            }
+        }
+
+        const countdownTimer = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Form Submission
+        async function handleSubmit(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const submitLoader = document.getElementById('submitLoader');
+
+            submitBtn.disabled = true;
+            submitText.textContent = 'Submitting...';
+            submitLoader.classList.remove('hidden');
+
+            try {
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                alert('Project submitted successfully!');
+                window.location.href = 'index-trail.html';
+            } catch (error) {
+                alert('Submission failed. Please try again.');
+            } finally {
+                submitBtn.disabled = false;
+                submitText.textContent = 'Submit Project';
+                submitLoader.classList.add('hidden');
+            }
+        }
+
+
+
+        async function verifyTeam() {
+            const email = document.getElementById('verifyEmail').value;
+            const teamDetails = document.getElementById('teamDetails');
+            const errorDiv = document.getElementById('verifyError');
+
+            try {
+                // First, find the team leader
+                const { data: leaderData, error: leaderError } = await supabaseClient
+                    .from('team_leaders')
+                    .select('*, teams(*)')
+                    .eq('college_email', email)
+                    .single();
+
+                if (leaderError) throw new Error('Team not found with this email');
+
+                // Get team members
+                const { data: membersData, error: membersError } = await supabaseClient
+                    .from('team_members')
+                    .select('*')
+                    .eq('team_id', leaderData.team_id);
+
+                if (membersError) throw membersError;
+
+                // Update UI with team details
+                document.getElementById('teamName').textContent = leaderData.teams.team_name;
+                document.getElementById('projectCategory').textContent = leaderData.teams.project_category;
+
+                // Build members list HTML
+                const membersList = document.getElementById('membersList');
+                membersList.innerHTML = `
+            <!-- Team Leader -->
+            <div class="p-3 bg-white/10 rounded-lg">
+                <div class="flex items-center">
+                    <i class="bi bi-person-star text-yellow-400 mr-2"></i>
+                    <div>
+                        <p class="font-semibold">${leaderData.full_name}</p>
+                        <p class="text-sm text-gray-400">${leaderData.college_email}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+                // Add other team members
+                membersData.forEach(member => {
+                    membersList.innerHTML += `
+                <div class="p-3 bg-white/10 rounded-lg">
+                    <div class="flex items-center">
+                        <i class="bi bi-person text-blue-400 mr-2"></i>
+                        <div>
+                            <p class="font-semibold">${member.full_name}</p>
+                            <p class="text-sm text-gray-400">${member.college_email}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+                });
+
+                // Show team details and hide error
+                teamDetails.classList.remove('hidden');
+                errorDiv.classList.add('hidden');
+
+            } catch (error) {
+                // Show error and hide team details
+                teamDetails.classList.add('hidden');
+                errorDiv.classList.remove('hidden');
+                errorDiv.innerHTML = `
+            <div class="flex items-center justify-center text-red-400">
+                <i class="bi bi-exclamation-triangle mr-2"></i>
+                ${error.message}
+            </div>
+        `;
+            }
+        }
+
+        async function handleSubmit(event) {
+    event.preventDefault();
+
+    // Get verified team email
+    const teamLeaderEmail = document.getElementById("verifyEmail").value.trim();
+    const teamDetails = document.getElementById("teamDetails");
+    
+    // Check if team is verified (teamDetails should be visible)
+    if (teamDetails.classList.contains('hidden')) {
+        alert("Please verify your team first before submitting.");
+        return;
+    }
+
+    // Form validation
+    const projectTitle = document.querySelector("input[placeholder='Project Title *']").value.trim();
+    const githubRepo = document.querySelector("input[placeholder='GitHub Repository URL *']").value.trim();
+    const demoVideo = document.querySelector("input[placeholder='Demo Video URL (YouTube/Drive) *']").value.trim();
+    const projectDesc = document.querySelector("textarea[placeholder='Project Description *']").value.trim();
+
+    // Validate required fields
+    if (!projectTitle || !githubRepo || !demoVideo || !projectDesc) {
+        alert("Please fill in all required fields");
+        return;
+    }
+
+    // Validate GitHub URL format
+    if (!githubRepo.startsWith('https://github.com/')) {
+        alert("Please enter a valid GitHub repository URL");
+        return;
+    }
+
+    const formData = {
+        team_leader_email: teamLeaderEmail,
+        project_title: projectTitle,
+        github_repository_url: githubRepo,
+        demo_video_url: demoVideo,
+        project_description: projectDesc,
+        submitted_at: new Date().toISOString()
+    };
+
+    try {
+        // Update UI - Loading state
+        const submitBtn = document.getElementById("submitBtn");
+        const submitText = document.getElementById("submitText");
+        const submitLoader = document.getElementById("submitLoader");
+        
+        submitBtn.disabled = true;
+        submitText.textContent = "Submitting...";
+        submitLoader.classList.remove("hidden");
+
+        // Submit to Supabase
+        const { data, error } = await supabaseClient
+            .from('project_submissions')
+            .insert([formData])
+            .select()
+            .single();
+
+        if (error) throw error;
+
+        // Success
+        alert("Project submitted successfully!");
+        document.getElementById("submissionForm").reset();
+        teamDetails.classList.add('hidden'); // Hide team details after submission
+
+    } catch (error) {
+        console.error("Error submitting project:", error);
+        alert(error.message || "Failed to submit project. Please try again.");
+        
+    } finally {
+        // Reset UI state
+        submitBtn.disabled = false;
+        submitText.textContent = "Submit Project";
+        submitLoader.classList.add("hidden");
+    }
+}
+
+    </script>
+</body>
+
+</html>
