@@ -1,6 +1,6 @@
 # ⚡ TechVerse – Your Gateway to Innovation
 
-![TechVerse Banner](https://github.com/user-attachments/assets/847af6c0-749a-4c06-8daa-ee5b76657a07)
+
 
 **⏱️ Built in just one week during HackVerse**, **TechVerse** is a dynamic platform that brings together the latest trends in **Technology, Artificial Intelligence, and Innovation** — all in one place!
 
